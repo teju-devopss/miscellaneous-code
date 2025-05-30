@@ -25,5 +25,5 @@ pipelines:
                     working_directory: prometheus
                 - exec:
                     command: terraform
-                    arguments: [ "apply" ,"auto-approve" ]
+                    arguments: [ "apply" ,"-auto-approve" ]
                     working_directory: prometheus
