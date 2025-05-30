@@ -14,7 +14,7 @@ terraform {
 
 resource "aws_instance" "prometheus" {
   ami           = data.aws_ami.centos8.image_id
-  instance_type = "small"
+  instance_type = "t3.small"
   vpc_security_group_ids = []
 }
 
