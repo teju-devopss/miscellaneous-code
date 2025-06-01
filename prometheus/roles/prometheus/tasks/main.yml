@@ -21,20 +21,26 @@
     enabled: yes
     daemon-reload: yes
 
+- name: Import Grafana GPG key
+  ansible.builtin.rpm_key:
+    key: https://rpm.grafana.com/gpg.key
+    state: present
+
 - name: Download Grafana RPM
   ansible.builtin.get_url:
-    url: https://dl.grafana.com/enterprise/release/grafana-enterprise-12.0.1-1.x86_64.rpm
-    dest: /opt/grafana-enterprise.rpm
+    url: https://dl.grafana.com/enterprise/release/grafana-enterprise-{{grafana_version}}.x86_64.rpm
+    dest: /tmp/grafana-enterprise.rpm
+    mode: '0644'
 
 - name: Install Grafana from RPM
   ansible.builtin.dnf:
-    name: /opt/grafana-enterprise.rpm
+    name: /tmp/grafana-enterprise.rpm
     state: present
 
-- name: Start grafana service
-  ansible.builtin.systemd_service:
-    name: grafana
-    state: restarted
-    enabled: yes
+- name: Enable and start Grafana service
+  ansible.builtin.systemd:
+    name: grafana-server
+    enabled: true
+    state: started
 
 
