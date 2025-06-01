@@ -34,11 +34,11 @@ scrape_configs:
 
   - job_name: "ec2"
     static_configs:
-      - targets: [ "frontend-dev.tejudevops.online:9100" ]
+      - targets: [ "10.10.1.188:9100" ]
         labels:
           instance: "frontend"
 
-      - targets: [ "backend-dev.tejudevops.online:9100" ]
+      - targets: [ "10.10.2.42:9100" ]
         labels:
           instance: "backend"
 
