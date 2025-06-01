@@ -42,4 +42,6 @@ scrape_configs:
         labels:
           instance: "backend"
 
+# here we will configure the prometheus server in a way that it will pull the data from nodes through node exporter
+
 
