@@ -10,7 +10,7 @@ pipelines:
         branch: main
 
     stages:
-      - dev:
+      - apply:
           fetch_materials: true
           approval:
             type: manual
