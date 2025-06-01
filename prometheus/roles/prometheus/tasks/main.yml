@@ -9,6 +9,7 @@
     src: prometheus.service
     dest: /etc/systemd/system/prometheus.service
 
+
 - name: Start prometheus service
   ansible.builtin.systemd_service:
     name: prometheus
