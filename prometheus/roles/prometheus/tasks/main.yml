@@ -24,11 +24,11 @@
 - name: Download Grafana RPM
   ansible.builtin.get_url:
     url: https://dl.grafana.com/enterprise/release/grafana-enterprise-12.0.1-1.x86_64.rpm
-    dest: /opt/prometheus-3.4.1.linux-amd64
+    dest: /opt/grafana-enterprise.rpm
 
 - name: Install Grafana from RPM
   ansible.builtin.dnf:
-    name: /opt/prometheus-3.4.1.linux-amd64
+    name: /opt/grafana-enterprise.rpm
     state: present
 
 - name: Start grafana service
