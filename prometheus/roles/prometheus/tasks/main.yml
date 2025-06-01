@@ -21,3 +21,14 @@
     enabled: yes
     daemon-reload: yes
 
+- name: Install the latest version of grafana
+  ansible.builtin.dnf:
+    name: https://dl.grafana.com/enterprise/release/grafana-enterprise-12.0.1-1.x86_64.rpm
+    state: installed
+
+- name: Start and enable grafana service
+  ansible.builtin.systemd:
+    name: grafana-server
+    enabled: yes
+    state: restarted
+
