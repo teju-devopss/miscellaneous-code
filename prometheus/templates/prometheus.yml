@@ -49,7 +49,11 @@ scrape_configs:
   - job_name: 'ec2'
     ec2_sd_configs:
       - region: us-east-1
-        port: 9100
+        port: 9100 # we add iam policy because here it asks to enable permission then only it will work
         filters:
           - name: tag:Monitor
             values: [ "yes" ]
+
+    relabel_configs:
+      - source_labels: [ __meta_ec2_tag_Name ]
+        target_label: name
