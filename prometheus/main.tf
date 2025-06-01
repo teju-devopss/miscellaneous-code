@@ -37,3 +37,43 @@ resource "aws_route53_record" "prometheus-public" {
   ttl     = 30
   records = [aws_instance.prometheus.public_ip]
 }
+resource "aws_iam_role" "main" {  # creating role for ec2 instance.
+  name = "prometheus-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+
+  inline_policy {
+    name = "parameter-store"
+
+    policy = jsonencode({
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "VisualEditor0",
+          "Effect": "Allow",
+          "Action": [
+            "ec2:DescribeInstances",
+            "ec2:DescribeAvailabilityZones"
+          ],
+          "Resource": "*"
+        }
+      ]
+    })
+  }
+}
+resource "aws_iam_instance_profile" "main" {# used to create instance profile ARN Which is automatically created manually but not
+  name = "prometheus-role"
+  role = aws_iam_role.main.name
+}
