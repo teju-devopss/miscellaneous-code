@@ -37,10 +37,12 @@ scrape_configs:
       - targets: [ "10.10.1.188:9100" ]
         labels:
           instance: "frontend"
+          project: "expense"
 
       - targets: [ "10.10.2.42:9100" ]
         labels:
           instance: "backend"
+          project: "expense"
 
 # here we will configure the prometheus server in a way that it will pull the data from nodes through node exporter
 
