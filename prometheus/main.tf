@@ -17,6 +17,8 @@ resource "aws_instance" "prometheus" {
   ami           = data.aws_ami.centos8.image_id
   instance_type = "t3.small"
   vpc_security_group_ids = ["sg-05c761dbd36f70805"]
+  iam_instance_profile = aws_iam_instance_profile.main.name
+
   tags = {
     Name = "prometheus-server"
   }
