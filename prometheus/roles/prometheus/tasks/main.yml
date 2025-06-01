@@ -31,4 +31,10 @@
     name: /opt/prometheus-3.4.1.linux-amd64
     state: present
 
+- name: Start grafana service
+  ansible.builtin.systemd_service:
+    name: grafana
+    state: restarted
+    enabled: yes
+
 
