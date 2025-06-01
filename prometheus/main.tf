@@ -39,6 +39,15 @@ resource "aws_route53_record" "prometheus-public" {
   ttl     = 30
   records = [aws_instance.prometheus.public_ip]
 }
+
+resource "aws_route53_record" "grafana" {
+  zone_id = "Z07191123NJU9NTTKKZJ1"
+  name    = "grafana"
+  type    = "A"
+  ttl     = 30
+  records = [aws_instance.prometheus.public_ip]
+}
+
 resource "aws_iam_role" "main" {  # creating role for ec2 instance.
   name = "prometheus-role"
 
