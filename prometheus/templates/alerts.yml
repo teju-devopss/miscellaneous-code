@@ -32,3 +32,11 @@ groups:
           severity: Critical
         annotations:
           summary: CPU Used Percentage in Critical State
+
+      - alert: NetworkPackageQueueDropCount
+        expr: increase(node_ethtool_pps_allowance_exceeded[5m])
+        for: 10m
+        labels:
+          severity: Critical
+        annotations:
+          summary: Network Package Queued/Dropped
