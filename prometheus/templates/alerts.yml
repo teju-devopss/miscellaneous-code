@@ -2,14 +2,14 @@ groups:
   - name: AppAlerts
     rules:
        - alert: Nginx service Down
-         expr: node_systemd_unit_state{exported_name="nginx.service",state="active"}
+         expr: node_systemd_unit_state{exported_name="nginx.service",state="active"}<1
          for: 2m
          labels:
            severity: critical
          annotations:
            summary: Nginx server is down
        - alert: Backend service Down
-         expr: node_systemd_unit_state{exported_name="Backend.service",state="active"}
+         expr: node_systemd_unit_state{exported_name="backend.service",state="active"}<1
          for: 2m
          labels:
            severity: critical
@@ -51,7 +51,7 @@ groups:
           summary: CPU Used Percentage in Critical State
 
       - alert: NetworkPackageQueueDropCount
-        expr: increase(node_ethtool_pps_allowance_exceeded[5m])
+        expr: increase(node_ethtool_pps_allowance_exceeded[5m])>1
         for: 10m
         labels:
           severity: Critical
