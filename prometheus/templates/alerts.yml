@@ -1,4 +1,21 @@
 groups:
+  - name: AppAlerts
+    rules:
+       - alert: Nginx service Down
+         expr: node_systemd_unit_state{exported_name="nginx.service",state="active"}
+         for: 2m
+         labels:
+           severity: critical
+         annotations:
+           summary: Nginx server is down
+       - alert: Backend service Down
+         expr: node_systemd_unit_state{exported_name="Backend.service",state="active"}
+         for: 2m
+         labels:
+           severity: critical
+         annotations:
+           summary: Backend server is down
+
   - name: SaturationAlerts
     rules:
       - alert: MemoryUsedPercentageWarning
