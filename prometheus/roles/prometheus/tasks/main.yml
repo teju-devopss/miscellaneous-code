@@ -43,17 +43,23 @@
     url: https://dl.grafana.com/enterprise/release/grafana-enterprise-{{ grafana_version }}.x86_64.rpm
     dest: /tmp/grafana-enterprise.rpm
     mode: '0644'
+- name: Check grafana Service
+  ansible.builtin.systemd_service:
+    name: grafana-server
+    state: restarted
+  register: out
+  ignore_errors: true
 
 - name: Install Grafana from RPM
   ansible.builtin.dnf:
     name: /tmp/grafana-enterprise.rpm
     state: present
 
-- name: Enable and start Grafana service
+- name: Enable and restart Grafana service
   ansible.builtin.systemd:
     name: grafana-server
     enabled: true
-    state: started
+    state: restarted
 
 # Install Alertmanager
 - name: Download Alertmanager setup file
