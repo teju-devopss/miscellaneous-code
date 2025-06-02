@@ -51,4 +51,25 @@
     enabled: true
     state: started
 
+- name: Download alert manager setup file
+  ansible.builtin.unarchive:
+    src: https://github.com/prometheus/alertmanager/releases/download/v{{alertmanager_version}}/alertmanager-{{alertmanager_version}}.linux-amd64.tar.gz
+    dest: /opt
+    remote_src: yes
 
+- name: copy alertmanager service file from template
+  ansible.builtin.template:
+    src: alertmanager.service
+    dest: /etc/systemd/system/alertmanager.service
+
+- name: copy alertmanager config file from template
+  ansible.builtin.template:
+    src: alertmanager.yml
+    dest: /opt/alertmanager-{{alertmanager_version}}.linux-amd64/alertmanager.yml
+
+- name: Start alertmanager service
+  ansible.builtin.systemd_service:
+    name: alertmanager
+    state: restarted
+    enabled: yes
+    daemon-reload: yes
