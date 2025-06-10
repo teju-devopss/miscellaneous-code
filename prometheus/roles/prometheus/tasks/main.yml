@@ -64,11 +64,6 @@
     state: restarted
     daemon_reload: yes
 
-- name: Copy file
-  ansible.builtin.copy:
-    src: grafana-expense.json
-    dest: /tmp/grafana-expense.json
-
     #jdhs
 
 
