@@ -64,6 +64,20 @@
     state: restarted
     daemon_reload: yes
 
+- name: Copy file
+  ansible.builtin.copy:
+    src: grafana-expense.json
+    dest: /tmp/grafana-expense.json
+
+- name: Import grafana dashboard
+  community.grafana.grafana.dashboard:
+    grafana_url: http://172.31.35.165:3000
+    grafana_api_key: glsa_NMbqoj8yruG3fLORELFIn3gv4mtEcbXP_548e04df
+    state: present
+    commit_message: Updated by ansible
+    overwrite: yes
+    path: /tmp/grafana-expense.json
+
     #jdhs
 
 
