@@ -70,7 +70,7 @@
     dest: /tmp/grafana-expense.json
 
 - name: Import grafana dashboard
-  community.grafana.grafana.dashboard:
+  community.grafana.grafana_dashboard:
     grafana_url: http://172.31.35.165:3000
     grafana_api_key: glsa_NMbqoj8yruG3fLORELFIn3gv4mtEcbXP_548e04df
     state: present
