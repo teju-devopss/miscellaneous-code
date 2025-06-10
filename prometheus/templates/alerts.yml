@@ -7,7 +7,7 @@ groups:
          labels:
            severity: critical
          annotations:
-           summary: Nginx server is down
+           summary: Backend server is down
        - alert: Backend service Down
          expr: node_systemd_unit_state{exported_name="backend.service",state="active"}<1
          for: 2m
