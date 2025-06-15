@@ -3,20 +3,20 @@
     src: elastic.repo
     dest: /etc/yum.repos.d/elastic.repo
 
-- name: Install elastic Search
-  ansible.builtin.dnf:
+- name: Install Elastic Search
+  ansible.builtin.yum:
     name: elasticsearch
     state: installed
 
-- name: Start elasticsearch services
+- name: Start elasticsearch service
   ansible.builtin.systemd_service:
     name: elasticsearch
     state: started
     enabled: yes
 
 - name: Install Kibana
-  ansible.builtin.dnf:
-    name: Kibana
+  ansible.builtin.yum:
+    name: kibana
     state: installed
 
 - name: Start kibana
@@ -25,19 +25,25 @@
     state: started
     enabled: yes
 
-- name: Install nginx
-  ansible.builtin.dnf:
+- name: Install Nginx
+  ansible.builtin.yum:
     name: nginx
-    state: installed
+    state: present
 
-- name: copy nginx config.file
+- name: Enable and start Nginx
+  ansible.builtin.systemd_service:
+    name: nginx
+    state: started
+    enabled: true
+
+- name: Copy nginx config file
   ansible.builtin.template:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
 
-- name: start elasticsearch
+- name: Reload nginx to apply new config
   ansible.builtin.systemd_service:
     name: nginx
-    state: started
-    enabled: yes
+    state: reloaded
+
 
