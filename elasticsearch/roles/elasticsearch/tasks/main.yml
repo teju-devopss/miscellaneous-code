@@ -6,7 +6,7 @@
 - name: Install elastic Search
   ansible.builtin.dnf:
     name: elasticsearch
-    state: restarted
+    state: installed
 
 - name: Start elasticsearch services
   ansible.builtin.systemd.service:
