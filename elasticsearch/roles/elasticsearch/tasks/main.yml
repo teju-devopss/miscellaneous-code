@@ -14,4 +14,14 @@
     state: started
     enabled: yes
 
+- name: Install Kibana
+  ansible.builtin.dnf:
+    name: Kibana
+    state: installed
+
+- name: Start kibana
+  ansible.builtin.systemd.service:
+    name: kibana
+    state: started
+    enabled: yes
 
