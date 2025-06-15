@@ -8,5 +8,10 @@
     name: elasticsearch
     state: restarted
 
+- name: Start elasticsearch services
+  ansible.builtin.systemd.service:
+    name: elasticsearch
+    state: started
+    enabled: yes
 
 
