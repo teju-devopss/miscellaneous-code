@@ -1,4 +1,4 @@
-- name: Expense project Setup
+- name:  elastic search Setup
   hosts: all
   become: true
   roles:
