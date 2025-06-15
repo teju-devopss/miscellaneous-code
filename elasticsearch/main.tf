@@ -34,7 +34,7 @@ resource "aws_instance" "elasticsearch" {
 
 resource "aws_route53_record" "elasticsearch" {
   zone_id = "Z07191123NJU9NTTKKZJ1"
-  name    = "prometheus"
+  name    = "elasticsearch"
   type    = "A"
   ttl     = 30
   records = [aws_instance.elasticsearch.public_ip]
