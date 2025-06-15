@@ -15,7 +15,7 @@ terraform {
 
 resource "aws_instance" "elasticsearch" {
   ami           = data.aws_ami.centos8.image_id
-  instance_type = "t3.small"
+  instance_type = "m6in.large"
   vpc_security_group_ids = ["sg-05c761dbd36f70805"]
   subnet_id = "subnet-03b0995466039e839"
 
