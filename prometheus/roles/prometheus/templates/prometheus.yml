@@ -57,3 +57,7 @@ scrape_configs:
     relabel_configs:
       - source_labels: [ __meta_ec2_tag_Name ]
         target_label: name
+
+
+#recording rules
+# the recording rules are used because only when you have big query instead of giving big query we can give short name so that no need to remember big name
