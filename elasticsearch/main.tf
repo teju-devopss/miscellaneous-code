@@ -40,14 +40,14 @@ resource "aws_route53_record" "elasticsearch" {
   records = [aws_instance.elasticsearch.public_ip]
 }
 
-# resource "aws_route53_record" "logstash" {
-#   zone_id = "Z07191123NJU9NTTKKZJ1"
-#   name    = "logstash"
-#   type    = "A"
-#   ttl     = 30
-#   records = [aws_instance.elasticsearch.private_ip]
-# }
-
+resource "aws_route53_record" "logstash" {
+  zone_id = "Z07191123NJU9NTTKKZJ1"
+  name    = "logstash"
+  type    = "A"
+  ttl     = 30
+  records = [aws_instance.elasticsearch.private_ip]
+}
+#here we give private_ip because we are giving instead filebeat.yml
 
 
 # resource "aws_route53_record" "grafana" {
