@@ -1,8 +1,6 @@
 - name: set hostname
   ansible.builtin.shell: set-hostname elasticsearch
 
-
-
 - name: Copy Elasticsearch repo
   ansible.builtin.template:
     src: elastic.repo
