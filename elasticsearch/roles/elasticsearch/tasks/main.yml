@@ -9,14 +9,14 @@
     dest: /etc/yum.repos.d/elastic.repo
 
 
-- name: Install Elk stack
+- name: Install ELK stack with version
   ansible.builtin.dnf:
     name: "{{ item }}"
-    state: installed
+    state: present
   loop:
-    - elasticsearch
-    - kibana
-    - logstash
+    - elasticsearch-8.14.0
+    - kibana-8.14.0
+    - logstash-8.14.0
     - nginx
 
 - name: Copy nginx config file
