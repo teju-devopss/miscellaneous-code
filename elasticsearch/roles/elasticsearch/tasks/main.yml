@@ -1,15 +1,17 @@
-- name: set hostname
+- name: Set hostname
   ansible.builtin.shell: set-hostname elasticsearch
 
-
-
-- name: Copy Elasticsearch repo
+- name: Copy Elastic repo
   ansible.builtin.template:
     src: elastic.repo
     dest: /etc/yum.repos.d/elastic.repo
 
+- name: Clean yum cache
+  ansible.builtin.shell: |
+    yum clean all
+    yum makecache
 
-- name: Install ELK stack with version
+- name: Install specific ELK 8.x versions
   ansible.builtin.dnf:
     name: "{{ item }}"
     state: present
@@ -19,12 +21,12 @@
     - logstash-8.14.0
     - nginx
 
-- name: Copy nginx config file
+- name: Copy nginx config
   ansible.builtin.template:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
 
-- name: Start elasticsearch service
+- name: Enable and start services
   ansible.builtin.systemd_service:
     name: "{{ item }}"
     state: restarted
@@ -34,7 +36,6 @@
     - kibana
     - logstash
     - nginx
-
 
 
 
