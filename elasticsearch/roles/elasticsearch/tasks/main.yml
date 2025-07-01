@@ -13,7 +13,7 @@
     state: installed
   loop:
     - elasticsearch
-#    - kibana
+    - kibana
 #    - logstash
 #    - nginx
 
@@ -29,7 +29,7 @@
     enabled: yes
   loop:
     - elasticsearch
-#    - kibana
+    - kibana
 #    - logstash
 #    - nginx
 
