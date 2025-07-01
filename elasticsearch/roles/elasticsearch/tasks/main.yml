@@ -14,7 +14,7 @@
   loop:
     - elasticsearch
     - kibana
-#    - logstash
+    - logstash
     - nginx
 
 - name: Copy nginx config file
@@ -30,7 +30,7 @@
   loop:
     - elasticsearch
     - kibana
-#    - logstash
+    - logstash
     - nginx
 
 
