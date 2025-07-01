@@ -1,5 +1,5 @@
 - name: Set hostname
-  ansible.builtin.shell: set-hostname elasticsearch
+  ansible.builtin.shell: hostnamectl set-hostname elasticsearch
 
 - name: Copy Elastic repo
   ansible.builtin.template:
@@ -11,7 +11,7 @@
     yum clean all
     yum makecache
 
-- name: Install specific ELK 8.x versions
+- name: Install specific ELK 8.x versions and Nginx
   ansible.builtin.dnf:
     name: "{{ item }}"
     state: present
@@ -20,6 +20,29 @@
     - kibana-8.14.0
     - logstash-8.14.0
     - nginx
+
+- name: Configure Elasticsearch
+  ansible.builtin.blockinfile:
+    path: /etc/elasticsearch/elasticsearch.yml
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    block: |
+      xpack.security.enabled: true
+      xpack.security.enrollment.enabled: true
+      xpack.security.http.ssl.enabled: false
+      network.host: 0.0.0.0
+      http.port: 9200
+
+- name: Configure Kibana
+  ansible.builtin.blockinfile:
+    path: /etc/kibana/kibana.yml
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    block: |
+      server.host: "0.0.0.0"
+      server.publicBaseUrl: "http://elasticsearch.tejudevops.online"
+      elasticsearch.hosts: ["http://localhost:9200"]
+      elasticsearch.username: "elastic"
+      elasticsearch.password: "changeme"
+      elasticsearch.ssl.verificationMode: none
 
 - name: Copy nginx config
   ansible.builtin.template:
