@@ -22,5 +22,5 @@ pipelines:
                 - exec:
                     working_directory: prometheus
                     command: bash
-                    arguments: [ "ansible.sh"]
+                    arguments: [ "ansible.sh",prometheus"]
 

@@ -1,5 +1,0 @@
-- name:  elastic search Setup
-  hosts: all
-  become: true
-  roles:
-    - elasticsearch
