@@ -47,21 +47,20 @@ resource "aws_lb" "tools" {
   }
 }
 
-
 resource "aws_lb_listener" "https" {
   load_balancer_arn = aws_lb.tools.arn
   port              = "443"
   protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
   certificate_arn   = var.acm_arn
 
   default_action {
-    type = "redirect"
+    type = "fixed-response"
 
     fixed_response {
       content_type = "text/plain"
       message_body = "404 Page Not Found"
-      status_code = "200"
+      status_code  = "200"
     }
   }
 }
