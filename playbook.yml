@@ -1,5 +1,5 @@
-- name: Expense project Setup
+- name: Apply Ansible Code
   hosts: all
-  become: true
+  become: yes
   roles:
-    - {{ role_name }}
+    - "{{ tool_name }}"
