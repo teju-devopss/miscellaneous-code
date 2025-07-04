@@ -1,29 +1,25 @@
 format_version: 10
-
 pipelines:
-
   alb-remove:
     group: tools
     label_template: "${COUNT}"
     materials:
       ansible:
         git: https://github.com/Tejaswini-Devops/miscellaneous-code
+        shallow_clone: false
+        auto_update: true
         branch: main
-
+        includes:
+          - src/**/*.*
     stages:
-      - dev:
+      - apply:
           fetch_materials: true
-          approval:
-            type: manual
-            allow_only_on_success: false
           jobs:
-            deployment:
+            apply:
+              approval:
+                type: manual
               timeout: 0
               tasks:
                 - exec:
-                    command: terraform
-                    arguments: [ "init"]
-
-                - exec:
-                    command: terraform
-                    arguments: [ "delete-alb.sh"]
+                    command: bash
+                    arguments: ["delete-alb.sh"]
