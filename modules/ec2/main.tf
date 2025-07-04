@@ -25,7 +25,7 @@ resource "aws_route53_record" "record" {
   records = [var.dns_name]
 }
 
-resource "aws_lb_listener" "rule" {
+resource "aws_lb_listener_rule" "rule" {
   listener_arn = var.listener_arn
   priority     = var.priority
 
