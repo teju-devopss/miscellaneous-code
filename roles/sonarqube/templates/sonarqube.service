@@ -1,14 +1,14 @@
-#[Unit]
-#Description=Sonar 7
-#After=network.target network-online.target
-#Wants=network-online.target
-#
-#[Service]
-#ExecStart=/home/sonarqube/bin/linux-x86-x64/sonar.sh start
-#ExecStop=/home/sonarqube/bin//sonar.sh stop
-#ExecReload=/home/sonar/sonarqube/bin/linux-x86-x64/sonar.sh restart
-#Type=forking
-#User=sonar
-#
-#[Install]
-#WantedBy=multi-user.target
+[Unit]
+Description=SonarQube 10
+After=network.target network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/home/sonarqube/sonarqube-25.6.0.109173/bin/linux-x86-x64/sonar.sh start
+ExecStop=/home/sonarqube/sonarqube-25.6.0.109173/sonar.sh stop
+ExecReload=/home/sonarqube/sonarqube-25.6.0.109173/sonar.sh restart
+Type=forking
+User=sonarqube
+
+[Install]
+WantedBy=multi-user.target

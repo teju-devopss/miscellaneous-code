@@ -7,10 +7,12 @@
     src: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-25.6.0.109173.zip
     dest: /home/sonarqube
     remote_src: yes
+    owner: sonarqube
+    group: sonarqube
 
 - name: Install Java
   ansible.builtin.dnf:
-    name: java-11-openjdk.x86_64
+    name: java-17-openjdk.x86_64
     state: installed
 
 #- name: Copy SonarQube Service file
