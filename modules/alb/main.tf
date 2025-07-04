@@ -77,7 +77,7 @@ resource "aws_lb_listener" "http" {
     redirect {
       port        = "443"
       protocol    = "HTTPS"
-      status_code = "Page Not Found"
+      status_code = "HTTP_301"
     }
   }
 }
