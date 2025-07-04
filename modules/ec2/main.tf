@@ -46,3 +46,8 @@ resource "aws_lb_target_group" "tg" {
   protocol = "HTTP"
   vpc_id   = var.vpc_id
 }
+resource "aws_lb_target_group_attachment" "test" {
+  target_group_arn = aws_lb_target_group.tg.arn
+  target_id        = aws_instance.ec2.id
+  port             = var.port
+}
