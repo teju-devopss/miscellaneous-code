@@ -15,13 +15,13 @@
     name: java-17-openjdk.x86_64
     state: installed
 
-#- name: Copy SonarQube Service file
-#  ansible.builtin.template:
-#    src: sonarqube.service
-#    dest: /etc/systemd/system/sonarqube.service
-#
-#- name: Start SonarQube Service
-#  ansible.builtin.systemd_service:
-#    name: sonarqube
-#    state: started
-#    enabled: yes
+- name: Copy SonarQube Service file
+  ansible.builtin.template:
+    src: sonarqube.service
+    dest: /etc/systemd/system/sonarqube.service
+
+- name: Start SonarQube Service
+  ansible.builtin.systemd_service:
+    name: sonarqube
+    state: started
+    enabled: yes
