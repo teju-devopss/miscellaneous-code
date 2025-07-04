@@ -20,7 +20,6 @@ pipelines:
               timeout: 0
               tasks:
                 - exec:
-                    working_directory: elasticsearch
                     command: bash
                     arguments: [ "ansible.sh","elasticsearch"]
 
