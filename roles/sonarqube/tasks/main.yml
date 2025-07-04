@@ -1,9 +1,14 @@
 - name: Set Hostname
-  ansible.builtin.shell: set-hostname sonarqube
+  ansible.builtin.hostname:
+    name: sonarqube
 
 - name: Add SonarQube User
   ansible.builtin.user:
     name: sonarqube
+    shell: /bin/bash
+    home: /home/sonarqube
+    state: present
+    create_home: yes
 
 - name: Download SonarQube
   ansible.builtin.unarchive:
@@ -12,19 +17,28 @@
     remote_src: yes
     owner: sonarqube
     group: sonarqube
+    extra_opts: [--strip-components=1]   # Optional: avoids nested directory
 
 - name: Install Java
   ansible.builtin.dnf:
     name: java-17-openjdk.x86_64
-    state: installed
+    state: present
 
 - name: Copy SonarQube Service file
   ansible.builtin.template:
     src: sonarqube.service
     dest: /etc/systemd/system/sonarqube.service
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Reload systemd
+  ansible.builtin.systemd:
+    daemon_reload: yes
 
 - name: Start SonarQube Service
-  ansible.builtin.systemd_service:
+  ansible.builtin.systemd:
     name: sonarqube
     state: started
     enabled: yes
+
