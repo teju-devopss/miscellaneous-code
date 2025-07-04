@@ -26,4 +26,4 @@ pipelines:
 
                 - exec:
                     command: terraform
-                    arguments: [ "destroy" ,"-auto-approve" ,"-target=module.alb"]
+                    arguments: [ "delete-alb.sh"]
