@@ -32,4 +32,3 @@ variable "tools" {
     }
   }
 }
-
