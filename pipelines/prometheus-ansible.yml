@@ -6,7 +6,7 @@ pipelines:
     label_template: "${COUNT}"
     materials:
       ansible:
-        git: https://github.com/Tejaswini-Devops/miscellaneous-code
+        git: https://github.com/teju-devopss/miscellaneous-code.git
         branch: main
 
     stages:

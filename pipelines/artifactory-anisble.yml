@@ -1,12 +1,12 @@
 format_version: 10
 
 pipelines:
-  sonarqube-ansible:
+  artifactory-ansible:
     group: tools
     label_template: "${COUNT}"
     materials:
       ansible:
-        git: https://github.com/Tejaswini-Devops/miscellaneous-code
+        git: https://github.com/teju-devopss/miscellaneous-code
         branch: main
 
     stages:
