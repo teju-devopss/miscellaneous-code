@@ -1,0 +1,28 @@
+format_version: 10
+pipelines:
+  artifactory-ansible:
+    group: tools
+    label_template: "${COUNT}"
+    materials:
+      ansible:
+        git: https://github.com/Tejaswini-Devops/miscellaneous-code
+        shallow_clone: false
+        auto_update: true
+        branch: main
+        includes:
+          - src/**/*.*
+    stages:
+      - apply:
+          fetch_materials: true
+          jobs:
+            apply:
+              approval:
+                type: manual
+              timeout: 0
+              tasks:
+                - exec:
+                    command: bash
+                    arguments: [ "ansible.sh", "artifactory" ]
+
+
+
