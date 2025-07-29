@@ -1,0 +1,28 @@
+- name: Template a file to /etc/file.conf
+  ansible.builtin.template:
+    src: jenkins.repo
+    dest: /etc/yum.repos.d/jenkins.repo
+
+- name: Install Java and Jenkins
+  yum:
+    name:
+      - fontconfig
+      - java-21-openjdk
+      - jenkins
+    state: present
+
+- name: Enable Jenkins service
+  systemd:
+    name: jenkins
+    enabled: yes
+    daemon_reload: yes
+
+- name: Start Jenkins service
+  systemd:
+    name: jenkins
+    state: started
+
+- name: Start Jenkins service
+  systemd:
+    name: jenkins
+    state: started
