@@ -21,8 +21,3 @@
   systemd:
     name: jenkins
     state: started
-
-- name: Start Jenkins service
-  systemd:
-    name: jenkins
-    state: started
