@@ -61,5 +61,54 @@ resource "aws_lb_target_group_attachment" "attach" {
   target_id        = aws_instance.ec2.id
   port             = var.port
 }
+resource "aws_iam_role" "main" {
+  name = "${var.tool}-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+}
+
+resource "aws_iam_instance_profile" "main" {
+  name = "${var.tool}-role"
+  role = aws_iam_role.main.name
+}
+
+resource "aws_iam_policy" "main" {
+  count       = length(var.policy_list)
+  name        = "${var.tool}-role-policy"
+  path        = "/"
+  description = "${var.tool}-role-policy"
 
 
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action   = var.policy_list
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "attach" {
+  count      = length(var.policy_list)
+  policy_arn = aws_iam_policy.main[0].arn
+  role       = aws_iam_role.main.name
+}
+
+##"Z07191123NJU9NTTKKZJ1"
+##  vpc_security_group_ids = ["sg-05c761dbd36f70805"]
+#  subnet_id              = "subnet-03b0995466039e839"

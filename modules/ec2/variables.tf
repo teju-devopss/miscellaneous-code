@@ -7,3 +7,4 @@ variable "vpc_id" {
 }
 variable "port" {}
 variable "priority" {}
+variable "policy_list" {}
