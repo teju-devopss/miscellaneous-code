@@ -1,7 +1,7 @@
 format_version: 10
 
 pipelines:
-  jenkins:
+  jenkins-ansible:
     group: tools
     label_template: "${COUNT}"
     materials:
