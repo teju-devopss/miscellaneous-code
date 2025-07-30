@@ -17,7 +17,7 @@
             <configVersion>2</configVersion>
             <userRemoteConfigs>
                 <hudson.plugins.git.UserRemoteConfig>
-                    <url>https://github.com/teju-devopss/{{repo_name}}</url>
+                    <url>https://github.com/teju-devopss/{{item}}</url>
                     <credentialsId>SSH</credentialsId>
                 </hudson.plugins.git.UserRemoteConfig>
             </userRemoteConfigs>
