@@ -38,6 +38,7 @@
      user: admin
   loop:
      - frontend
+     - catalogue
 
 
 
