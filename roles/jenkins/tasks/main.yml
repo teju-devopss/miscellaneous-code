@@ -1,26 +1,21 @@
-- name: Template a file to /etc/file.conf
+- name: Copy Jenkins Repo file
   ansible.builtin.template:
     src: jenkins.repo
     dest: /etc/yum.repos.d/jenkins.repo
 
-- name: Install Java and Jenkins
-  yum:
+- name: Install Jenkins
+  ansible.builtin.dnf:
     name:
       - fontconfig
-      - java-21-openjdk
+      - java-17-openjdk
       - jenkins
-    state: present
+    state: installed
 
-- name: Enable Jenkins service
-  systemd:
-    name: jenkins
-    enabled: yes
-    daemon_reload: yes
-
-- name: Start Jenkins service
-  systemd:
+- name: Start Jenkins Service
+  ansible.builtin.systemd_service:
     name: jenkins
     state: started
+    enabled: yes
 
 - name: Create a jenkins job
   community.general.jenkins_job:
