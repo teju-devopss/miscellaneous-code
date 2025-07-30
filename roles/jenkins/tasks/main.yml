@@ -17,6 +17,18 @@
     state: started
     enabled: yes
 
+- name: Install python3 and python3-jenkins on the target
+  package:
+    name:
+      - python3
+      - python3-pip
+    state: present
+
+- name: Install python-jenkins using pip
+  pip:
+    name: python-jenkins
+    executable: pip3
+
 - name: Create Job
   community.general.jenkins_job:
     config: "{{ lookup('template', 'templates/pipeline.xml') }}"
