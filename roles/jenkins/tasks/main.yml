@@ -44,6 +44,8 @@
      - payment
      - shipping
      - dispatch
+     - parameter-store-int-container
+
 
 
 
