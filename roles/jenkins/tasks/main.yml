@@ -45,6 +45,7 @@
      - shipping
      - dispatch
      - parameter-store-init-container
+     - schema-loader
 
 
 
