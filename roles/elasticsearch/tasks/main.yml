@@ -1,13 +1,13 @@
+
 - name: set hostname
   ansible.builtin.shell: set-hostname elasticsearch
 
-- name: Copy Elasticsearch repo file
+- name: Copy Elastic Repo file
   ansible.builtin.template:
     src: elastic.repo
     dest: /etc/yum.repos.d/elastic.repo
 
-
-- name: Install Elk stack
+- name: Install ELK Stack
   ansible.builtin.dnf:
     name: "{{ item }}"
     state: installed
@@ -17,7 +17,7 @@
     - logstash
     - nginx
 
-- name: Copy nginx config file
+- name: Copy Nginx Config file
   ansible.builtin.template:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
@@ -27,7 +27,7 @@
     src: logstash.conf
     dest: /etc/logstash/conf.d/logstash.conf
 
-- name: Start elk services
+- name: Start ELK Stack
   ansible.builtin.systemd_service:
     name: "{{ item }}"
     state: restarted
@@ -37,11 +37,3 @@
     - kibana
     - logstash
     - nginx
-
-
-
-
-
-
-
-
