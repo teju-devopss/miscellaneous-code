@@ -36,6 +36,14 @@ variable "tools" {
     #   priority      = 105
     #   policy_list   =[]
     # }
+
+    load-runner = {
+      instance_type = "t3.small"
+      port          = 80
+      priority      = 107
+      policy_list   = []
+    }
+
     jenkins = {
       instance_type = "t3.medium"
       port          = 8080
